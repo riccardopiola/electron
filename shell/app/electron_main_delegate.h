@@ -8,6 +8,7 @@
 #include <memory>
 #include <string>
 
+#include "base/component_export.h"
 #include "content/public/app/content_main_delegate.h"
 #include "content/public/common/content_client.h"
 
@@ -19,7 +20,7 @@ namespace electron {
 
 std::string LoadResourceBundle(const std::string& locale);
 
-class ElectronMainDelegate : public content::ContentMainDelegate {
+class COMPONENT_EXPORT(ELECTRON_LIB) ElectronMainDelegate : public content::ContentMainDelegate {
  public:
   static const char* const kNonWildcardDomainNonPortSchemes[];
   static const size_t kNonWildcardDomainNonPortSchemesSize;

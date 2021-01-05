@@ -300,9 +300,11 @@ action("electron_fuses") {
   args = rebase_path(outputs)
 }
 
-source_set("electron_lib") {
+component("electron_lib") {
   configs += [ "//v8:external_startup_data" ]
   configs += [ "//third_party/electron_node:node_internals" ]
+
+  defines = [ "IS_ELECTRON_LIB_IMPL" ]
 
   public_configs = [
     ":branding",
@@ -357,6 +359,7 @@ source_set("electron_lib") {
     "//services/proxy_resolver:lib",
     "//services/video_capture/public/mojom:constants",
     "//services/viz/privileged/mojom/compositing",
+    "//services/network:network_service",
     "//skia",
     "//third_party/blink/public:blink",
     "//third_party/blink/public:blink_devtools_inspector_resources",
@@ -370,6 +373,7 @@ source_set("electron_lib") {
     "//third_party/zlib/google:zip",
     "//ui/base/idle",
     "//ui/events:dom_keycode_converter",
+    "//ui/events/blink",
     "//ui/gl",
     "//ui/native_theme",
     "//ui/shell_dialogs",
@@ -394,7 +398,7 @@ source_set("electron_lib") {
     "//third_party/blink/renderer",
   ]
 
-  defines = [ "V8_DEPRECATION_WARNINGS" ]
+  defines += [ "V8_DEPRECATION_WARNINGS" ]
   libs = []
 
   if (is_linux) {
@@ -423,7 +427,7 @@ source_set("electron_lib") {
   }
 
   if (is_component_build) {
-    defines += [ "NODE_SHARED_MODE" ]
+    #defines += [ "NODE_SHARED_MODE" ]
   }
 
   if (enable_fake_location_provider) {
@@ -533,7 +537,12 @@ source_set("electron_lib") {
     ]
   }
   if (is_win) {
-    libs += [ "dwmapi.lib" ]
+    libs += [
+      "dwmapi.lib",
+      "Comctl32.lib",
+      "uiautomationcore.lib",
+      "wtsapi32.lib",
+    ]
     deps += [
       "//components/crash/core/app:crash_export_thunks",
       "//ui/native_theme:native_theme_browser",

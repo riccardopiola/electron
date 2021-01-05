@@ -5,6 +5,7 @@
 #ifndef SHELL_COMMON_ELECTRON_CONSTANTS_H_
 #define SHELL_COMMON_ELECTRON_CONSTANTS_H_
 
+#include "base/component_export.h"
 #include "base/files/file_path.h"
 #include "build/build_config.h"
 #include "electron/buildflags/buildflags.h"
@@ -12,27 +13,27 @@
 namespace electron {
 
 // The app-command in NativeWindow.
-extern const char kBrowserForward[];
-extern const char kBrowserBackward[];
+COMPONENT_EXPORT(ELECTRON_LIB) extern const char kBrowserForward[];
+COMPONENT_EXPORT(ELECTRON_LIB) extern const char kBrowserBackward[];
 
 // Strings describing Chrome security policy for DevTools security panel.
-extern const char kSHA1Certificate[];
-extern const char kSHA1MajorDescription[];
-extern const char kSHA1MinorDescription[];
-extern const char kCertificateError[];
-extern const char kValidCertificate[];
-extern const char kValidCertificateDescription[];
-extern const char kSecureProtocol[];
-extern const char kSecureProtocolDescription[];
+COMPONENT_EXPORT(ELECTRON_LIB) extern const char kSHA1Certificate[];
+COMPONENT_EXPORT(ELECTRON_LIB) extern const char kSHA1MajorDescription[];
+COMPONENT_EXPORT(ELECTRON_LIB) extern const char kSHA1MinorDescription[];
+COMPONENT_EXPORT(ELECTRON_LIB) extern const char kCertificateError[];
+COMPONENT_EXPORT(ELECTRON_LIB) extern const char kValidCertificate[];
+COMPONENT_EXPORT(ELECTRON_LIB) extern const char kValidCertificateDescription[];
+COMPONENT_EXPORT(ELECTRON_LIB) extern const char kSecureProtocol[];
+COMPONENT_EXPORT(ELECTRON_LIB) extern const char kSecureProtocolDescription[];
 
 #if BUILDFLAG(ENABLE_RUN_AS_NODE)
-extern const char kRunAsNode[];
+COMPONENT_EXPORT(ELECTRON_LIB) extern const char kRunAsNode[];
 #endif
 
 #if BUILDFLAG(ENABLE_PDF_VIEWER)
 // The MIME type used for the PDF plugin.
-extern const char kPdfPluginMimeType[];
-extern const base::FilePath::CharType kPdfPluginPath[];
+COMPONENT_EXPORT(ELECTRON_LIB) extern const char kPdfPluginMimeType[];
+COMPONENT_EXPORT(ELECTRON_LIB) extern const base::FilePath::CharType kPdfPluginPath[];
 #endif  // BUILDFLAG(ENABLE_PDF_VIEWER)
 
 }  // namespace electron

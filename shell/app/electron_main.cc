@@ -28,9 +28,11 @@
 #include "components/crash/core/app/run_as_crashpad_handler_win.h"
 #include "content/public/app/sandbox_helper_win.h"
 #include "sandbox/win/src/sandbox_types.h"
+#include "third_party/crashpad/crashpad/util/win/initial_client_data.h"
+
+// Electron includes
 #include "shell/app/command_line_args.h"
 #include "shell/app/electron_main_delegate.h"
-#include "third_party/crashpad/crashpad/util/win/initial_client_data.h"
 
 #elif defined(OS_LINUX)  // defined(OS_WIN)
 #include <unistd.h>

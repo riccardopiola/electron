@@ -153,7 +153,7 @@ index 0000000000000000000000000000000000000000..446119163d1f7bad577cb0b7b217ecf2
 +  }
 +  if (is_component_build) {
 +    defines += [
-+      "NODE_SHARED_MODE",
++      #"NODE_SHARED_MODE",
 +    ]
 +  }
 +
@@ -200,7 +200,7 @@ index 0000000000000000000000000000000000000000..446119163d1f7bad577cb0b7b217ecf2
 +  }
 +}
 +
-+component("node_lib") {
++static_library("node_lib") {
 +  deps = [
 +    ":node_js2c",
 +    "deps/cares",
@@ -1605,7 +1605,7 @@ index e285f3d79b8833f95f0b24d0a2c2d62c13037a44..8be21f12f6913d5d06d8a5dcb508c62b
 +#ifndef NODE_MODULE_VERSION
  #define NODE_MODULE_VERSION 83
 +#endif
- 
+
  // The NAPI_VERSION provided by this version of the runtime. This is the version
  // which the Node binary being built supports.
 diff --git a/tools/generate_config_gypi.py b/tools/generate_config_gypi.py
@@ -1750,10 +1750,10 @@ index 729b416fc47d3ff3317ae3671dee977c719a8841..530ca7d441d3b65d4e4fac7dd5880afe
 @@ -182,7 +182,7 @@ def headers(action):
    if sys.platform.startswith('aix'):
      action(['out/Release/node.exp'], 'include/node/')
- 
+
 -  subdir_files('deps/v8/include', 'include/node/', ignore_inspector_headers)
 +  subdir_files('../../v8/include', 'include/node/', ignore_inspector_headers)
- 
+
    if 'false' == variables.get('node_shared_libuv'):
      subdir_files('deps/uv/include', 'include/node/', action)
 diff --git a/tools/js2c.py b/tools/js2c.py
@@ -1773,8 +1773,8 @@ index 0f073e182bdb2858957e4b28ae15b366d7933dbe..93e9474297fd9032981786ae9d4e005f
 +    filename = "config.gypi"
 +
    return os.path.splitext(filename)[0]
- 
- 
+
+
 diff --git a/tools/tar.py b/tools/tar.py
 new file mode 100644
 index 0000000000000000000000000000000000000000..eb697be25779db62c829aac45a509804e9fff331

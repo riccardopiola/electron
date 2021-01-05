@@ -4,9 +4,11 @@
 
 #ifndef SHELL_APP_NODE_MAIN_H_
 #define SHELL_APP_NODE_MAIN_H_
+#include "base/component_export.h"
 
 namespace electron {
 
+COMPONENT_EXPORT(ELECTRON_LIB)
 int NodeMain(int argc, char* argv[]);
 
 }  // namespace electron

@@ -11,6 +11,7 @@ import("//third_party/widevine/cdm/widevine.gni")
 # Builds some of the chrome sources that Electron depends on.
 static_library("chrome") {
   visibility = [ "//electron:electron_lib" ]
+  libs = []
   sources = [
     "//chrome/browser/accessibility/accessibility_ui.cc",
     "//chrome/browser/accessibility/accessibility_ui.h",
@@ -46,12 +47,19 @@ static_library("chrome") {
     "//chrome/browser/predictors/resolve_host_client_impl.h",
     "//chrome/browser/ssl/security_state_tab_helper.cc",
     "//chrome/browser/ssl/security_state_tab_helper.h",
-    "//chrome/browser/ssl/tls_deprecation_config.cc",
     "//chrome/browser/ui/views/autofill/autofill_popup_view_utils.cc",
     "//chrome/browser/ui/views/autofill/autofill_popup_view_utils.h",
     "//extensions/browser/app_window/size_constraints.cc",
     "//extensions/browser/app_window/size_constraints.h",
   ]
+
+  # Horrible hack to get component build to work since the i have trouble
+  # making "//chrome/browser/ssl/tls_deprecation_config.cc" work
+  if (is_debug && is_component_build) {
+    sources += ["//electron/chromium_src/chrome/browser/tls_deprecation_config.cc"]
+  } else {
+    sources += ["//chrome/browser/ssl/tls_deprecation_config.cc"]
+  }
 
   if (is_mac) {
     sources += [
@@ -72,6 +80,9 @@ static_library("chrome") {
       "//chrome/browser/win/chrome_process_finder.h",
       "//chrome/child/v8_crashpad_support_win.cc",
       "//chrome/child/v8_crashpad_support_win.h",
+    ]
+    libs = [
+      "wbemuuid.lib",  # For CLSID_WbemLocator
     ]
   }
 

@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 
+#include "base/component_export.h"
 #include "base/command_line.h"
 #include "base/macros.h"
 #include "build/build_config.h"
@@ -15,7 +16,7 @@
 namespace electron {
 
 // Singleton to remember the original "argc" and "argv".
-class ElectronCommandLine {
+class COMPONENT_EXPORT(ELECTRON_LIB) ElectronCommandLine {
  public:
   static const base::CommandLine::StringVector& argv() { return argv_; }
 
